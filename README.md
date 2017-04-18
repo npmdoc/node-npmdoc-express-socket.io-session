@@ -1,9 +1,14 @@
-# api documentation for  [express-socket.io-session (v1.3.2)](https://github.com/oskosk/express-socket.io-session#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-express-socket.io-session.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-express-socket.io-session) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session.svg)](https://travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session)
+# npmdoc-express-socket.io-session
+
+#### api documentation for  [express-socket.io-session (v1.3.2)](https://github.com/oskosk/express-socket.io-session#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-express-socket.io-session.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-express-socket.io-session) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session.svg)](https://travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session)
+
 #### Share a cookie-based express-session middleware with socket.io
 
-[![NPM](https://nodei.co/npm/express-socket.io-session.png?downloads=true)](https://www.npmjs.com/package/express-socket.io-session)
+[![NPM](https://nodei.co/npm/express-socket.io-session.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/express-socket.io-session)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-express-socket.io-session/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-express-socket.io-session_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-express-socket.io-session/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-express-socket.io-session/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-express-socket.io-session/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-express-socket.io-session/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-express-socket.io-session/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-express-socket.io-session/build/screenCapture.npmPackageListing.svg)
 
@@ -17,8 +22,7 @@
 
 {
     "author": {
-        "name": "osk",
-        "email": "oskosk@gmail.com"
+        "name": "osk"
     },
     "bugs": {
         "url": "https://github.com/oskosk/express-socket.io-session"
@@ -46,13 +50,11 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "osk",
-            "email": "oskosk@gmail.com"
+            "name": "osk"
         }
     ],
     "name": "express-socket.io-session",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/oskosk/express-socket.io-session.git"
@@ -63,16 +65,6 @@
     "version": "1.3.2"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module express-socket.io-session](#apidoc.module.express-socket.io-session)
-
-
-
-# <a name="apidoc.module.express-socket.io-session"></a>[module express-socket.io-session](#apidoc.module.express-socket.io-session)
 
 
 
