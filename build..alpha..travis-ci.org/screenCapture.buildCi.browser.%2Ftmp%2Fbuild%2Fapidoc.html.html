@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/oskosk/express-socket.io-session#readme"
-
-    >express-socket.io-session (v1.3.2)</a>
+    <a href="https://github.com/oskosk/express-socket.io-session#readme">express-socket.io-session (v1.3.2)</a>
 </h1>
 <h4>Share a cookie-based express-session middleware with socket.io</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.express-socket.io-session">module express-socket.io-session</a><ol>
 
@@ -89,19 +82,19 @@
   var socketIoSharedSessionMiddleware;
 
   // Accept options as second argument if only 2 parameters passed
-  if (arguments.length == 2 &#x26;&#x26; typeof cookieParserMiddleware === &#x27;object&#x27;) {
+  if (arguments.length == 2 &amp;&amp; typeof cookieParserMiddleware === 'object') {
     options = cookieParserMiddleware;
     cookieParserMiddleware = undefined;
   }
 
-  if (typeof cookieParserMiddleware === &#x27;undefined&#x27;) {
-    debug(&#x22;No cookie-parser instance passed as argument. Creating a cookie-parser &#x22; +
-      &#x22;instance with default values&#x22;);
+  if (typeof cookieParserMiddleware === 'undefined') {
+    debug("No cookie-parser instance passed as argument. Creating a cookie-parser " +
+      "instance with default values");
     cookieParserMiddleware = cookieparser();
   }
   options = options || {};
   var saveUninitializedSession = options.saveUninitialized;
-  debug(&#x22;Creating socket.io middleware&#x22;);
+  debug("Creating socket.io middleware");
 
   socketIoSharedSessionMiddleware = function(socket, next) {
     var req = socket.handshake;
@@ -116,9 +109,9 @@
     var _onevent = socket.onevent;
     // Override socket.on if autoSave = true;
     if (options.autoSave === true) {
-      debug(&#x22;Using autoSave feature. express-session middleware will be called on every event received&#x22;)
+      debug("Using autoSave feature. express-session middleware will be called on every event received")
       socket.onevent = function() {
-        debug(&#x22;Executing socket.onevent monkeypatched by express-socket.io-session&#x22;);
+        debug("Executing socket.onevent monkeypatched by express-socket.io-session");
         var _args = arguments;
         originalHash = savedHash = hash(req.session);
         cookieId = req.sessionID;
@@ -132,7 +125,7 @@
     //Parse session cookie
     cookieParserMiddleware(req, res, function(err) {
       if (err) {
-        debug(&#x22;cookieParser errored&#x22;);
+        debug("cookieParser errored");
         return next(err);
       }
       expressSessionMiddleware(req, res, function(req, res) {
@@ -155,7 +148,7 @@
 
     function hash(sess) {
       return crc(JSON.stringify(sess, function(key, val) {
-        if (key !== &#x27;cookie&#x27;) {
+        if (key !== 'cookie') {
           return val;
         }
       }));
@@ -168,23 +161,23 @@
 
     // check if session has been saved
     function isSaved(sess) {
-      return originalId === sess.id &#x26;&#x26; savedHash === hash(sess);
+      return originalId === sess.id &amp;&amp; savedHash === hash(sess);
     }
 
     // determine if session should be destroyed
     function shouldDestroy(req) {
-      return req.sessionID &#x26;&#x26; unsetDestroy &#x26;&#x26; req.session == null;
+      return req.sessionID &amp;&amp; unsetDestroy &amp;&amp; req.session == null;
     }
 
     // determine if session should be saved to store
     function shouldSave(req) {
       // cannot set cookie without a session ID
-      if (typeof req.sessionID !== &#x27;string&#x27;) {
-        debug(&#x27;session ignored because of bogus req.sessionID %o&#x27;, req.sessionID);
+      if (typeof req.sessionID !== 'string') {
+        debug('session ignored because of bogus req.sessionID %o', req.sessionID);
         return false;
       }
 
-      return !saveUninitializedSession &#x26;&#x26; cookieId !== req.sessionID ? isModified(req.session) : !isSaved(req.session)
+      return !saveUninitializedSession &amp;&amp; cookieId !== req.sessionID ? isModified(req.session) : !isSaved(req.session)
     }
   };
 
@@ -203,3 +196,4 @@
     ]
 </div>
 </div>
+</body></html>

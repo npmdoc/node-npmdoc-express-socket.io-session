@@ -61,12 +61,139 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.express-socket.io-session">module express-socket.io-session</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-socket.io-session.io-session">
+            function <span class="apidocSignatureSpan">express-socket.</span>io-session
+            <span class="apidocSignatureSpan">(expressSessionMiddleware, cookieParserMiddleware, options)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.express-socket.io-session" id="apidoc.module.express-socket.io-session">module express-socket.io-session</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.express-socket.io-session.io-session" id="apidoc.element.express-socket.io-session.io-session">
+        function <span class="apidocSignatureSpan">express-socket.</span>io-session
+        <span class="apidocSignatureSpan">(expressSessionMiddleware, cookieParserMiddleware, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">io-session = function (expressSessionMiddleware, cookieParserMiddleware, options) {
+  var socketIoSharedSessionMiddleware;
+
+  // Accept options as second argument if only 2 parameters passed
+  if (arguments.length == 2 &#x26;&#x26; typeof cookieParserMiddleware === &#x27;object&#x27;) {
+    options = cookieParserMiddleware;
+    cookieParserMiddleware = undefined;
+  }
+
+  if (typeof cookieParserMiddleware === &#x27;undefined&#x27;) {
+    debug(&#x22;No cookie-parser instance passed as argument. Creating a cookie-parser &#x22; +
+      &#x22;instance with default values&#x22;);
+    cookieParserMiddleware = cookieparser();
+  }
+  options = options || {};
+  var saveUninitializedSession = options.saveUninitialized;
+  debug(&#x22;Creating socket.io middleware&#x22;);
+
+  socketIoSharedSessionMiddleware = function(socket, next) {
+    var req = socket.handshake;
+    var res = {
+      end: function() {}
+    };
+    // originalHash, savedHash, originalId, cookieId
+    // are variables present for replicating express-session autoSaving behavioiur
+    var originalHash, savedHash;
+    var originalId;
+    var cookieId;
+    var _onevent = socket.onevent;
+    // Override socket.on if autoSave = true;
+    if (options.autoSave === true) {
+      debug(&#x22;Using autoSave feature. express-session middleware will be called on every event received&#x22;)
+      socket.onevent = function() {
+        debug(&#x22;Executing socket.onevent monkeypatched by express-socket.io-session&#x22;);
+        var _args = arguments;
+        originalHash = savedHash = hash(req.session);
+        cookieId = req.sessionID;
+        originalId = req.sessionID;
+        _onevent.apply(socket, _args);
+        if (shouldSave(req)) {
+          req.session.save()
+        }
+      };
+    }
+    //Parse session cookie
+    cookieParserMiddleware(req, res, function(err) {
+      if (err) {
+        debug(&#x22;cookieParser errored&#x22;);
+        return next(err);
+      }
+      expressSessionMiddleware(req, res, function(req, res) {
+        next();
+      });
+    });
+<span class="apidocCodeCommentSpan">    /*
+     * These functions hash, isModified, isSaved, shouldSave
+     * and shouldDestroy are canibalized from express-session
+     * in order to this module being able to comply with the autoSave options.
+     */
+</span>
+    /**
+     * Hash the given `sess` object omitting changes to `.cookie`.
+     *
+     * @param {Object} sess
+     * @return {String}
+     * @private
+     */
+
+    function hash(sess) {
+      return crc(JSON.stringify(sess, function(key, val) {
+        if (key !== &#x27;cookie&#x27;) {
+          return val;
+        }
+      }));
+    }
+
+    // check if session has been modified
+    function isModified(sess) {
+      return originalId !== sess.id || originalHash !== hash(sess);
+    }
+
+    // check if session has been saved
+    function isSaved(sess) {
+      return originalId === sess.id &#x26;&#x26; savedHash === hash(sess);
+    }
+
+    // determine if session should be destroyed
+    function shouldDestroy(req) {
+      return req.sessionID &#x26;&#x26; unsetDestroy &#x26;&#x26; req.session == null;
+    }
+
+    // determine if session should be saved to store
+    function shouldSave(req) {
+      // cannot set cookie without a session ID
+      if (typeof req.sessionID !== &#x27;string&#x27;) {
+        debug(&#x27;session ignored because of bogus req.sessionID %o&#x27;, req.sessionID);
+        return false;
+      }
+
+      return !saveUninitializedSession &#x26;&#x26; cookieId !== req.sessionID ? isModified(req.session) : !isSaved(req.session)
+    }
+  };
+
+
+  return socketIoSharedSessionMiddleware;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
