@@ -1,6 +1,6 @@
 # npmdoc-express-socket.io-session
 
-#### api documentation for  [express-socket.io-session (v1.3.2)](https://github.com/oskosk/express-socket.io-session#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-express-socket.io-session.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-express-socket.io-session) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session.svg)](https://travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session)
+#### basic api documentation for  [express-socket.io-session (v1.3.2)](https://github.com/oskosk/express-socket.io-session#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-express-socket.io-session.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-express-socket.io-session) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session.svg)](https://travis-ci.org/npmdoc/node-npmdoc-express-socket.io-session)
 
 #### Share a cookie-based express-session middleware with socket.io
 
@@ -62,7 +62,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "version": "1.3.2"
+    "version": "1.3.2",
+    "bin": {}
 }
 ```
 
